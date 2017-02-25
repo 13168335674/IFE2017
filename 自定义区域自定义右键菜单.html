@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义区域自定义右键菜单</title>
+</head>
+<style>
+	body{
+		margin: 0;padding:0;width:100vw;height: 100vh;text-align: center;
+		display: table-cell;vertical-align: middle;text-align: center;
+	}
+	#contion{
+		width:50%;height:50%;text-align: center;margin:auto;background: #eee;border: 2px solid blue;font-size: 40px;line-height:50vh;
+	}
+	#menu{
+		position:absolute;width:50px;top:0;left:0;display:none;
+		width:50px;height:100px;text-align:center;border: 1px solid black;background:blue;font: 10px;font-weight:bold;
+	}
+	#menu ul,li{
+		list-style:none;padding:0;height:30px;
+	}
+</style>
+<script>
+	window.onload=function(){
+		var clientdiv = document.getElementById('contion'),
+			menu = document.getElementById("menu");
+
+		clientdiv.oncontextmenu=function(event){		//对右键事件进行监听
+			event=event||window.event;
+			event.preventDefault();						//取消事件默认行为
+			menu.style.display="block";					//显示自定义菜单
+			//console.log("当前客户端的宽高:"+window.innerWidth+" "+window.innerHeight);
+			//console.log("div宽高:"+clientdiv.offsetWidth+" "+clientdiv.offsetHeight);
+			//console.log("鼠标位置:"+event.clientX+" "+event.clientY);
+		var divWidth = clientdiv.offsetWidth,			//盒子宽高
+			divHeight = clientdiv.offsetHeight,		
+			menuX = event.clientX,						//鼠标坐标
+			menuY = event.clientY;
+			//console.log(clientdiv.offsetLeft);
+			maxclientX=clientdiv.offsetLeft+divWidth-52;	//鼠标单击范围边界值
+			maxclientY=clientdiv.offsetTop+divHeight-102;
+		if(menuX)
+			if(menuX>maxclientX){
+				menu.style.left=menuX-52+"px";
+			}else{
+				menu.style.left=menuX+"px";
+			};
+			if(menuY<maxclientY){
+				menu.style.top=menuY+"px";
+			}else{
+				menu.style.top=menuY-102+"px";
+			}
+		};
+		clientdiv.onclick=function(){					//鼠标单击事件
+			menu.style.display="none";
+		};
+		console.log("大学毕业可以六六的");
+	};
+</script>
+<body>
+	<div id="contion">
+		<p>自定义区域</p>
+	</div>
+	<div id="menu">
+			<ul>
+				<li>666</li>
+				<li>666</li>
+				<li>666</li>
+			</ul>
+		</div>
+</body>
+</html>
