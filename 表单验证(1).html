@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单验证(1)</title>
+	<style>
+		*{ margin:0;padding:0;}
+		form{ position:absolute;top:10px;left:20px;text-align:center;}
+		label span{padding-right:5px;font-size:30px;font-weight:bold;vertical-align:middle;	
+									  /*使用基线对齐使得表单文字对齐*/}
+		label input{ height:40px;vertical-align:middle;}
+		#mytext{ width:300px;border:3px solid #eee;opacity:0.5;border-radius:8px;padding:0 10px;}
+		#mybutton{ height:45px;width:65px;color:#fff;font-size:20px;font-weight:bold;border:none;border-radius:10px;background:#2f79ba;}
+		#message{ display:block;font-size:20px;text-align:left;margin:10px 0px 0px 80px;color:#AAA;}
+	</style>
+
+	<script>
+		window.onload=function(){
+			var mytext = document.getElementById("mytext"),
+				mybutton = document.getElementById("mybutton"),
+				message = document.getElementById("message");
+				mytext.focus();					/*自动获取焦点*/
+			mytext.onblur=function(){			/*onblur:失去焦点事件  onfocus:取得焦点事件*/
+				if(mytext.value!==""){			/*文本不为空*/
+					var re = /^\w{4,16}$/;
+					var reg = new RegExp(re);
+					if(reg.test(mytext.value)){ /*格式正确*/
+						mytext.style.border="3px solid #5BBE40";
+						message.innerText="名称格式正确";     /*这是使用innerText()修改文本语义化使用标签  												不使用innerHTML()*/
+					}else{						/*格式错误*/
+						mytext.style.border="3px solid #DE0014";
+						message.innerText="输入有误";
+					}
+				}else{							/*文本为空*/
+					mytext.style.border="3px solid #DE0014";
+					message.innerText="姓名不能为空";	
+				}
+			};
+		};
+	</script>
+</head>
+<body>
+	<form action="">
+		<label>
+			<span>名称</span>
+		    <input type="text" id="mytext">
+			<input type="button" value="验证" id="mybutton">
+			<span id="message">必填,长度为4～16个字符</span>
+		</label>
+	</form>
+</body>
+</html>
