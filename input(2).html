@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单验证(1)</title>
+	<style>
+		*{ margin:0;padding:0;}
+		form{ position:absolute;top:10px;left:20px;text-align:left;}
+		label span{padding-right:5px;font-size:30px;font-weight:bold;vertical-align:middle;	
+									  /*使用基线对齐使得表单文字对齐*/}
+		label input{ height:40px;vertical-align:middle;position:absolute;left:150px;font-size:25px;}
+
+		#mytext{ width:300px;border:3px solid #eee;opacity:0.5;border-radius:8px;padding:0 10px;}
+		#message{ display:block;font-size:20px;text-align:left;margin:20px 0px 0px 150px;color:#AAA;}
+
+		#mytextpassword{ width:300px;border:3px solid #eee;opacity:0.5;border-radius:8px;padding:0 10px;}
+		#messagepassword{ display:block;font-size:20px;text-align:left;margin:20px 0px 0px 150px;color:#AAA;}
+
+		#mytextpassword2{ width:300px;border:3px solid #eee;opacity:0.5;border-radius:8px;padding:0 10px;}
+		#messagepassword2{ display:block;font-size:20px;text-align:left;margin:20px 0px 0px 150px;color:#AAA;}
+		
+		#mytextemail{ width:300px;border:3px solid #eee;opacity:0.5;border-radius:8px;padding:0 10px;}
+		#messageemail{ display:block;font-size:20px;text-align:left;margin:20px 0px 0px 150px;color:#AAA;}
+
+		#mytextphone{ width:300px;border:3px solid #eee;opacity:0.5;border-radius:8px;padding:0 10px;}
+		#messagephone{ display:block;font-size:20px;text-align:left;margin:20px 0px 0px 150px;color:#AAA;}
+
+		#mybutton{ height:45px;width:85px;color:#fff;font-size:20px;font-weight:bold;border:none;border-radius:10px;background:#2f79ba;display: block;margin-left:333px;margin-top:20px;}
+	</style>
+
+	<script>
+		window.onload=function(){
+		/*获取DOM元素*/
+			var mybutton = document.getElementById("mybutton"),
+				myform = document.getElementById("myform"),
+
+				message = document.getElementById("message"),
+				mytext = document.getElementById("mytext"),
+
+				mytextpassword = document.getElementById("mytextpassword"),
+				messagepassword = document.getElementById("messagepassword"),
+
+				mytextpassword2 = document.getElementById("mytextpassword2"),
+				messagepassword2 = document.getElementById("messagepassword2"),
+
+				messageemail = document.getElementById("messageemail"),
+				mytextemail = document.getElementById("mytextemail"),
+
+				messagephone = document.getElementById("messagephone"),
+				mytextphone = document.getElementById("mytextphone");
+
+
+
+		/*自动获取第一个焦点*/
+				mytext.focus();					
+		/*myform.submit程序开始运行设置逻辑值*/
+				myform.submit=false;
+
+		/*对名称表单进行检验*/
+			mytext.onclick=function(){
+				message.innerText="必填,长度为4～16个字符";
+			};
+
+			mytext.onblur=function(){			/*onblur:失去焦点事件  onfocus:取得焦点事件*/
+				if(mytext.value!==""){			/*文本不为空*/
+					var re = /((\w)*(\s)*(\w)*){4,16}/;
+					var reg = new RegExp(re);
+					if(reg.test(mytext.value)){ /*格式正确*/
+						mytext.style.border="3px solid #5BBE40";
+						message.innerText="名称格式正确";     /*这是使用innerText()修改文本语义化使用标签  												不使用innerHTML()*/
+					}else{						/*格式错误*/
+						mytext.style.border="3px solid #DE0014";
+						message.innerText="输入有误";
+						myform.submit=false;
+					}
+				}else{							/*文本为空*/
+					mytext.style.border="3px solid #DE0014";
+					message.innerText="姓名不能为空";	
+					myform.submit=false;
+				}
+			};
+
+
+			/*对密码表单进行检验*/
+			mytextpassword.onclick=function(){
+				messagepassword.innerText="必填,长度为4～16个字符";
+			};
+
+			mytextpassword.onblur=function(){			/*onblur:失去焦点事件  onfocus:取得焦点事件*/
+				if(mytextpassword.value!==""){			/*文本不为空*/
+					var re = /^\w{4,16}$/;
+					var reg = new RegExp(re);
+					if(reg.test(mytextpassword.value)){ /*格式正确*/
+						mytextpassword.style.border="3px solid #5BBE40";
+						messagepassword.innerText="密码格式正确";     /*这是使用innerText()修改文本语义化使用标签  												不使用innerHTML()*/
+					}else{						/*格式错误*/
+						mytextpassword.style.border="3px solid #DE0014";
+						messagepassword.innerText="密码格式有误";
+						myform.submit=false;
+					}
+				}else{							/*文本为空*/
+					mytextpassword.style.border="3px solid #DE0014";
+					messagepassword.innerText="密码不能为空";	
+					myform.submit=false;
+				}
+			};
+
+
+			/*对密码表单再次进行检验*/
+			mytextpassword2.onclick=function(){
+				messagepassword2.innerText="必填,长度为4～16个字符";
+			};
+
+			mytextpassword2.onblur=function(){			/*onblur:失去焦点事件  onfocus:取得焦点事件*/
+				if(mytextpassword2.value!==""){			/*文本不为空*/
+					var re = /^\w{4,16}$/;
+					var reg = new RegExp(re);
+					if(reg.test(mytextpassword2.value)){ /*格式正确*/
+						mytextpassword2.style.border="3px solid #5BBE40";
+						messagepassword2.innerText="密码输入正确";     /*这是使用innerText()修改文本语义化使用标签  												不使用innerHTML()*/
+						if(mytextpassword.value==mytextpassword2.value){
+						}else{
+						mytextpassword2.style.border="3px solid #DE0014";
+							messagepassword2.innerText="密码输入错误"; 
+							myform.submit=false;
+						}
+					}else{						/*格式错误*/
+						mytextpassword2.style.border="3px solid #DE0014";
+						messagepassword2.innerText="密码格式有误";
+						myform.submit=false;
+					}
+				}else{							/*文本为空*/
+					mytextpassword2.style.border="3px solid #DE0014";
+					messagepassword2.innerText="密码不能为空";	
+					myform.submit=false;
+				}
+			};
+
+
+			/*对邮箱表单进行检验*/
+			mytextemail.onclick=function(){
+				messageemail.innerText="必填,输入邮箱地址";
+			};
+
+			mytextemail.onblur=function(){			/*onblur:失去焦点事件  onfocus:取得焦点事件*/
+				if(mytextemail.value!==""){			/*文本不为空*/
+					var re = /^(\w)+(@)\w+$/;
+					var reg = new RegExp(re);
+					if(reg.test(mytextemail.value)){ /*格式正确*/
+						mytextemail.style.border="3px solid #5BBE40";
+						messageemail.innerText="邮箱地址正确";     /*这是使用innerText()修改文本语义化使用标签  												不使用innerHTML()*/
+					}else{						/*格式错误*/
+						mytextemail.style.border="3px solid #DE0014";
+						messageemail.innerText="邮箱地址输入有误";
+						myform.submit=false;
+					}
+				}else{							/*文本为空*/
+					mytextemail.style.border="3px solid #DE0014";
+					messageemail.innerText="邮箱地址不能为空";	
+					myform.submit=false;
+				}
+			};
+
+			/*对手机号码表单进行检验*/
+			mytextphone.onclick=function(){
+				messagephone.innerText="必填,长度为11个数字";
+			};
+
+			mytextphone.onblur=function(){			/*onblur:失去焦点事件  onfocus:取得焦点事件*/
+				if(mytextphone.value!==""){			/*文本不为空*/
+					var re = /^\d{11}$/;
+					var reg = new RegExp(re);
+					if(reg.test(mytextphone.value)){ /*格式正确*/
+						mytextphone.style.border="3px solid #5BBE40";
+						messagephone.innerText="手机号码格式正确";     /*这是使用innerText()修改文本语义化使用标签  												不使用innerHTML()*/
+						myform.submit=true;
+					}else{						/*格式错误*/
+						mytextphone.style.border="3px solid #DE0014";
+						messagephone.innerText="输入有误";
+						myform.submit=false;
+					}
+				}else{							/*文本为空*/
+					mytextphone.style.border="3px solid #DE0014";
+					messagephone.innerText="手机号码不能为空";	
+					myform.submit=false;
+				}
+			};
+
+
+			/*进行整体校验*/
+			myform.onsubmit=function(){
+				if(myform.submit){
+					alert("提交成功")
+					return false;
+				}else{
+					alert("提交失败")
+					return false;	
+				}
+			}
+		};
+	</script>
+</head>
+<body>
+	<form action="" id="myform" >
+		<label>
+			<span>名称</span>
+		    <input type="text" id="mytext">
+			<span id="message">        </span>
+		</label>
+
+		<label>
+			<span>密码</span>
+		    <input type="password" id="mytextpassword">
+			<span id="messagepassword">        </span>
+		</label>
+
+		<label>
+			<span>密码确认</span>
+		    <input type="password" id="mytextpassword2">
+			<span id="messagepassword2">        </span>
+		</label>
+
+		<label>
+			<span>邮箱</span>
+		    <input type="text" id="mytextemail">			
+			<span id="messageemail">        </span>
+		</label>
+
+		<label>
+			<span>手机</span>
+		    <input type="text" id="mytextphone">
+			<span id="messagephone">        </span>
+		</label>
+		
+		<input type="submit" value="验证" id="mybutton">
+	</form>
+</body>
+</html>
