@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>input(3)</title>
+	<style>
+		*{padding:0;margin:0;font-size:30px;}
+		form{margin-left:500px;margin-top:80px;border:5px solid green;margin-right:900px;}
+		div{margin:30px;}
+		input[type="radio"]{width:20px;height:20px;margin: 10px;}
+		input[type="text"]{border:2px solid blue;opacity:0.4;border-radius:10px;padding: 10px;}
+		select{border: 2px solid blue;opacity: 0.4;border-radius:10px;color:red;padding:5px;}
+		#outschoolSelect{display: none}
+	</style>
+	<script>
+		window.onload=function(){
+			var myform = document.forms[0],										//获取表单
+				school = myform.school,											//获取在校信息
+				inschool = document.getElementById('inschool'),
+				outschool = document.getElementById('outschool'),
+				inschoolSelect = document.getElementById('inschoolSelect'),																									//获取在校生列表
+				outschoolSelect = document.getElementById('outschoolSelect'),																								//获取非校生列表
+				myhome = document.getElementById('myhome'),																													//获取所在地			  
+				myhomeschool = document.getElementById('myhomeschool'),																										//获取所在地学校
+				outschoolinput = document.getElementById('outschoolinput');																									//获取工作地址
+
+			/*对是否在校表单进行校验*/
+			inschool.onclick=function(){
+				inschoolSelect.style.display="block";
+				outschoolSelect.style.display="none";
+			};
+			outschool.onclick=function(){
+				inschoolSelect.style.display="none";
+				outschoolSelect.style.display="block";
+			};
+
+			/*对在校生表单进行校验*/
+			myhome.onclick=function(){
+
+				switch(myhome.value){
+					case "北京" : myhomeschool.options.length=0;
+								  myhomeschool.options.add(new Option("北京大学"));
+								  myhomeschool.options.add(new Option("北京中学"));
+								  myhomeschool.options.add(new Option("北京小学"));
+								  break;
+					case "深圳" : myhomeschool.options.length=0;
+								  myhomeschool.options.add(new Option("深圳大学"));
+								  myhomeschool.options.add(new Option("深圳中学"));
+								  myhomeschool.options.add(new Option("深圳小学"));
+								  break;
+					case "东莞" : myhomeschool.options.length=0;
+								  myhomeschool.options.add(new Option("东莞大学"));
+								  myhomeschool.options.add(new Option("东莞中学"));
+								  myhomeschool.options.add(new Option("东莞小学"));
+								  break;
+				}
+			};
+			
+
+		};
+	</script>
+</head>
+<body>
+	<form action="">
+
+		<div id="school">
+			<label>
+				在校生<input type="radio" name="radio" id="inschool" checked>
+			</label>
+			<label>
+				非校生<input type="radio" name="radio" id="outschool">
+			</label>
+		</div>
+
+		<div id="inschoolSelect">
+			<label>
+				<span>学校</span>
+				<select id="myhome">
+					<option value="北京" id="schoolbj">北京</option>
+					<option value="深圳" id="schoolsz">深圳</option>
+					<option value="东莞" id="schooldg">东莞</option>
+				</select>
+
+				<select id="myhomeschool" >
+					<option value="北京大学">北京大学</option>
+					<option value="北京中学">北京中学</option>
+					<option value="北京小学">北京小学</option>
+				</select>
+			</label>
+		</div>
+		<div id="outschoolSelect">
+			<span>就业单位 </span>
+			<input id="outschoolinput" type="text">
+		</div>
+	</form>
+</body>
+</html>
