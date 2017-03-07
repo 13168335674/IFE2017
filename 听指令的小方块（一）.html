@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<style>
+		*{margin:0;padding:0;font-size:26px;}
+
+		tr{border:1px solid black;}
+		th{border-bottom:1px solid black;border-right:1px solid black;}
+		thead th{border-right: none}
+		td{border-right:1px solid black;margin:0;width:30px;height:30px;border-bottom:1px solid black;margin:0;width:30px;height:30px;margin-top:15px;}
+
+		.firshthright{border-left:1px solid black;}
+		.firstth{border-bottom:none}
+
+		#floatdiv{position:absolute;top:33px;left:30px;height:21px;width:32px;border-top:12px solid blue;background: red;opacity: 0.8;}
+
+		.myinput{margin-left:85px;margin-top:10px;}
+		.myinput input{border:2px solid orange;margin-right: 5px;padding:10px;font-size:20px;border-radius:10px;width:80px;color:red;font-weight: bold}
+		.myinput input:focus{outline:none;}
+		input:nth-child(2):focus{color:blue;}
+
+	</style>
+	<title>听指令的小正方形</title>
+</head>
+<body>
+	<div id="floatdiv"></div>
+	<table>
+		<thead>
+			<th class="firstth firstthnullright"> </th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+		</thead>
+		<tr>
+			<th class="firstth firstthright">1</th><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td>
+		</tr>
+		<tr>
+			<th class="firstth firstthright">2</th><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td>
+		</tr>
+		<tr>
+			<th class="firstth firstthright">3</th><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td>
+		</tr>
+		<tr>
+			<th class="firstth firstthright">4</th><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td>
+		</tr>
+		<tr>
+			<th class="firstth firstthright">5</th><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td>
+		</tr>
+		<tr>
+			<th class="firstth firstthright">6</th><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td>
+		</tr>
+		<tr>
+			<th class="firstth firstthright">7</th><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td>
+		</tr>
+		<tr>
+			<th class="firstth firstthright">8</th><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td>
+		</tr>
+		<tr>
+			<th class="firstth firstthright">9</th><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td>
+		</tr>
+		<tr>
+			<th class="firstth firstthright">10</th><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td><td>  </td>
+		</tr>
+	</table>
+	<div class="myinput">
+			<input type="text" id="mytext" ><input type="button" value="执行" id="mybutton">
+	</div>
+	<script>
+		window.onload=function(){
+			var mytext = document.getElementById("mytext"),
+				mybutton = document.getElementById("mybutton"),
+				floatdiv = document.getElementById("floatdiv"),
+				mydeg = 0,
+				myleft = 30,
+				mytop = 33;
+				/*top:33px;left:30px;
+				height:21px;width:32px;	*/
+			mytext.focus();
+			
+			mybutton.onclick=function(){
+				var val = mytext.value;
+				switch(val){
+					case val="GO":go();
+					break;
+					case val="RIG":rig();
+					break;
+					case val="LEF":lef();
+					break;
+					case val="BAC":bac();
+					break;
+					default:alert(123);
+				}
+			};
+			
+			function go(){
+				if((mydeg==90||mydeg==-270)&&(myleft<322.5)){
+					myleft+=32.5;
+					floatdiv.style.left=myleft+"px";
+				};
+				if((mydeg==180||mydeg==-180)&&(mytop<325.5)){
+					mytop+=32.5;
+					floatdiv.style.top=mytop+"px";
+					console.log(floatdiv.style.top)
+				};
+				if((mydeg==270||mydeg==-90)&&(myleft>30)){
+					myleft-=32.5;
+					floatdiv.style.left=myleft+"px";
+				};
+				if((mydeg==0)&&(mytop>33)){
+					mytop-=32.5;
+					floatdiv.style.top=mytop+"px";
+				};
+			};
+			function rig(){
+				mydeg+=90;
+				if(mydeg>=360||mydeg<=-360){mydeg=0};
+				floatdiv.style.WebkitTransform="rotate("+mydeg+"deg)";
+			};
+			function lef(){
+				mydeg+=-90;
+				if(mydeg>=360||mydeg<=-360){mydeg=0};
+				floatdiv.style.WebkitTransform="rotate("+mydeg+"deg)";
+			};
+			function bac(){
+				mydeg+=180;
+				if(mydeg>=360||mydeg<=-360){mydeg=0};
+				floatdiv.style.WebkitTransform="rotate("+mydeg+"deg)";
+			};
+
+		};
+	</script>
+</body>
+</html>
+
