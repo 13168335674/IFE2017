@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta>
+	<title>浮生天气</title>
+
+	<style>
+		body{padding: 0;margin:0;font-size:11px;background:#03c5ff;}
+		.mytitle{height:10vh;text-align:left;padding: 20px;font-size:30px;font-weight:bold;box-shadow: -90px 60px 180px #fff}
+			.mytitle span:first-child{color:#74ffc6;font-size: 48px;display: inline-block;transform: rotate(5deg);margin-right: 5px;margin-left: 30px} 			/*, '#27ae60', , '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857*/
+			.mytitle span:last-child{color:#feffa5;font-size: 47px;display: inline-block;transform: rotate(5deg);}
+		.mybody{;height:90vh;border-top:15px solid #00bdff;border-bottom:15px solid #00bdff;color:#fff;font-size: 50px;}
+		.today{;height:45%;border-top: 15px solid #00bdff;border-bottom: 15px solid #00bdff;text-align:center;}
+			.todaytitle{color:#f2fcff;font-size:58px;font-weight: bold; }
+			.todaytitle~p{display: inline-block;margin-right: 40px;font-size: 30px;margin-bottom:5px;color:#befeff}
+			.zhishu{color:#e2ffff;line-height: 60px;font-weight:bold;font-size: 28px;}
+		.sixday{;height:55%;border-top: 15px solid #00bdff;border-bottom: 15px solid #00bdff;text-align:center;box-shadow: -90px 60px 180px #fff}
+			.sixday p:nth-child(1){color:#befeff;font-size:38px;font-weight: bold;}
+			.sixtitle~p{display: inline-block;margin-right: 40px;font-size: 18px;margin-bottom:5px;color:#f2fcff;font-weight: bold}
+			.wendu{color:#e2ffff;line-height: 90px;font-weight:bold;}
+
+			#city{position:fixed;top:10px;right:20px;float:right;font-size: 30px;color:#9b59b6;font-weight: bold;}
+	</style>
+</head>
+<body>
+	<div class="mytitle">
+		<span>浮生</span><span>天气</span>
+	</div>
+	<div id="city"></div>
+	<div class="mybody">
+		<div class="today">
+			<p class="todaytitle">今日天气</p>
+			<p><span>今日温度:</span><br><span class="zhishu" id="zhishu1">11</span></p>
+			<p><span>今日天气:</span><br><span class="zhishu" id="zhishu2">11</span></p>
+			<p><span>今日时间:</span><br><span class="zhishu" id="zhishu3">11</span></p>
+			<p><span>舒适度指数:</span><br><span class="zhishu" id="zhishu4">11</span></p>
+			<p><span>当前风向:</span><br><span class="zhishu" id="zhishu5">11</span></p>
+			<p><span>更新时间:</span><br><span class="zhishu" id="zhishu6">11</span></p>
+		</div>
+		<div class="sixday">
+			<p class="sixtitle">未来六天天气</p>
+			<p><span id="week1">第一天</span><br><span class="wendu" id="wendu1">11</span></p>
+			<p><span id="week2">第二天</span><br><span class="wendu" id="wendu2">11</span></p>
+			<p><span id="week3">第三天</span><br><span class="wendu" id="wendu3">11</span></p>
+			<p><span id="week4">第四天</span><br><span class="wendu" id="wendu4">11</span></p>
+			<p><span id="week5">第五天</span><br><span class="wendu" id="wendu5">11</span></p>
+			<p><span id="week6">第六天</span><br><span class="wendu" id="wendu6">11</span></p>
+		</div>
+	</div>
+	<div style="color:red;text-align:center;font-size:20px;">老婆～捏捏屁股      I LOVE YOU  ！！！</div>
+	<script>
+	 	 var myscript = document.createElement("script"),
+	 	 	 zhishu1 = document.getElementById("zhishu1"),
+	 	 	 zhishu2 = document.getElementById("zhishu2"),
+	 	 	 zhishu3 = document.getElementById("zhishu3"),
+	 	 	 zhishu4 = document.getElementById("zhishu4"),
+	 	 	 zhishu5 = document.getElementById("zhishu5"),
+	 	 	 zhishu6 = document.getElementById("zhishu6"),
+	 	 	 wendu1  = document.getElementById("wendu1"),
+	 	 	 wendu2  = document.getElementById("wendu2"),
+	 	 	 wendu3  = document.getElementById("wendu3"),
+	 	 	 wendu4  = document.getElementById("wendu4"),
+	 	 	 wendu5  = document.getElementById("wendu5"),
+	 	 	 wendu6  = document.getElementById("wendu6"),
+	 	 	 week1  = document.getElementById("week1"),
+	 	 	 week2  = document.getElementById("week2"),
+	 	 	 week3  = document.getElementById("week3"),
+	 	 	 week4  = document.getElementById("week4"),
+	 	 	 week5  = document.getElementById("week5"),
+	 	 	 week6  = document.getElementById("week6"),
+	 	 	 city = document.getElementById("city");
+
+         myscript.src = "http://v.juhe.cn/weather/index?cityname=%E6%B7%B1%E5%9C%B3&dtype=&format=&key=21d187f0a658568d09551cbb47240812&callback=cd";
+         document.head.appendChild(myscript); 
+         function cd(data){
+         	console.log(data)
+         	zhishu1.innerHTML=data.result.today.temperature;
+         	zhishu2.innerHTML=data.result.today.weather;
+         	zhishu3.innerHTML=data.result.today.date_y;
+         	zhishu4.innerHTML=data.result.today.dressing_index;
+         	zhishu5.innerHTML=data.result.sk.wind_direction;
+         	zhishu6.innerHTML=data.result.sk.time;
+         	var mytime = new Date(),
+         		myyear = mytime.getFullYear(),
+         		mymonth = mytime.getMonth()+1,
+         		mydate = mytime.getDate();
+         		if(mymonth<10){mymonth="0"+mymonth};
+         		if(mydate<10){mydate="0"+mydate};
+         		today = parseInt(myyear+mymonth+mydate);
+         		console.log(today+1)
+         	week1.innerHTML=data.result.future["day_"+(today)].week;
+         	week2.innerHTML=data.result.future["day_"+(today+1)].week;
+         	week3.innerHTML=data.result.future["day_"+(today+2)].week;
+         	week4.innerHTML=data.result.future["day_"+(today+3)].week;
+         	week5.innerHTML=data.result.future["day_"+(today+4)].week;
+         	week6.innerHTML=data.result.future["day_"+(today+5)].week;
+         	wendu1.innerHTML=data.result.future["day_"+(today)].temperature;
+         	wendu2.innerHTML=data.result.future["day_"+(today+1)].temperature;
+         	wendu3.innerHTML=data.result.future["day_"+(today+2)].temperature;
+         	wendu4.innerHTML=data.result.future["day_"+(today+3)].temperature;
+         	wendu5.innerHTML=data.result.future["day_"+(today+4)].temperature;
+         	wendu6.innerHTML=data.result.future["day_"+(today+5)].temperature;
+         	city.innerHTML="By "+data.result.today.city;
+
+
+     }
+	</script>
+</body>
+</html>
