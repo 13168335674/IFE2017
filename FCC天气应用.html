@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>浮生天气</title>
+	<style>
+		body{padding: 0;margin:0;font-size:11px;background: #eee}
+		.mytitle{width:100%;height:10vh;text-align:left;padding: 20px;font-size:30px;font-weight:bold;}
+			.mytitle span:first-child{color:#27ae60;font-size: 48px;display: inline-block;transform: rotate(5deg);margin-right: 5px;margin-left: 30px} 			/*#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857*/
+			.mytitle span:last-child{color:blue;font-size: 47px;display: inline-block;transform: rotate(5deg);}
+		.mybody{width:100%;height:90vh;border:1px solid #eeeee2;}
+		.today{width:100%;height:45%;border: 1px dashed #f39c12;text-align:center;}
+			.todaytitle{color:#e74c3c;font-size:38px;transform:rotate(2deg);}
+			.todaytitle~p{display: inline-block;;margin-right: 40px;font-size: 18px;margin-bottom:5px;}
+			.zhishu{color:#9b59b6;line-height: 60px;font-weight:bold;}
+		.sixday{width:100%;height:55%;border: 1px dashed #e74c3c;text-align:center;}
+			.sixday p:nth-child(1){color:#16a085;font-size:38px;transform:rotate(2deg);}
+			.sixtitle~p{display: inline-block;;margin-right: 40px;font-size: 18px;margin-bottom:5px;}
+			.wendu{color:#9b59b6;line-height: 90px;font-weight:bold;}
+	</style>
+</head>
+<body>
+	<div class="mytitle">
+		<span>浮生</span><span>天气</span>
+	</div>
+	<div class="mybody">
+		<div class="today">
+			<p class="todaytitle">今日天气</p>
+			<p><span>温度:</span><br><span class="zhishu" id="zhishu1">11</span></p>
+			<p><span>穿衣指数:</span><br><span class="zhishu" id="zhishu2">11</span></p>
+			<p><span>洗车指数:</span><br><span class="zhishu" id="zhishu3">11</span></p>
+			<p><span>旅行指数:</span><br><span class="zhishu" id="zhishu4">11</span></p>
+			<p><span>锻炼指数:</span><br><span class="zhishu" id="zhishu5">11</span></p>
+			<p><span>紫外线指数:</span><br><span class="zhishu" id="zhishu6">11</span></p>
+		</div>
+		<div class="sixday">
+			<p class="sixtitle">未来六天天气</p>
+			<p><span>第一天</span><br><span class="wendu" id="wendu1">11</span></p>
+			<p><span>第二天</span><br><span class="wendu" id="wendu2">11</span></p>
+			<p><span>第三天</span><br><span class="wendu" id="wendu3">11</span></p>
+			<p><span>第四天</span><br><span class="wendu" id="wendu4">11</span></p>
+			<p><span>第五天</span><br><span class="wendu" id="wendu5">11</span></p>
+			<p><span>第六天</span><br><span class="wendu" id="wendu6">11</span></p>
+		</div>
+	</div>
+</body>
+</html>
