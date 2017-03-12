@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UI浮出层</title>
+  <style>
+    body{margin:0;padding:0;background: url("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1489309806&di=84e82b451ebd346a9bbeba5000c99365&src=http://images.quanjing.com/is015/high/37795410.jpg");background-repeat:no-repeat;}
+    .yy{ position:fixed;top:0px;width:100%;height:100vh;background:rgba(0,0,0,0.3);display: none}
+    .fd{ position: fixed;top:30%;left:35%;width:30%;height:30%;background:#fff;overflow:hidden;background: url("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1489309806&di=5b223331c3209828682d3e5724d051a9&src=http://pic36.nipic.com/20131203/15117924_130235602195_2.jpg");background-size:40%}
+    /*width:100%;height:100vh;background:rgba(0,0,0,0.5); position:relative;top:0;left: 0*/
+    /*width:30%;height:30%;background:#fff; position:absolute; left:50%; top:50%; margin-left: -15%; margin-top:-15%*/
+    /*position:fixed;top:0px;width:100%;height:100vh;background:rgba(0,0,0,0.5)*/      
+    /*width:30%;height:30%;background:#fff;position: fixed;top:30%;left:35%;*/
+    .fdtitle{ background:#848484;color:#eee;height:10%;padding: 10px;font-size:18px;border:1px solid black;overflow:hidden;}
+    .fdbody p{ padding:10px;font-size:30px;text-align:center;color:green;font-weight: bold}
+    .button {  position:absolute;bottom:15px;right:15px;}
+    .button button{border:1px solid black;background: #848484;color:#fff;font-size:20px;padding:8px 22px;color:yellow;}
+  </style>
+</head>
+<body>
+    <div class="yy" id="yy">
+      <div class="fd">
+        <div class="fdtitle">国家安全局提示您</div>
+        <div class="fdbody">
+          <p>这是大象写的浮出层</p>
+          <div class="button" id="button">
+            <button>爱你</button>
+            <button style="color:pink">么么哒</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+    var yy = document.getElementById("yy"),
+        button = document.getElementById("button");
+    yy.onclick=function(e){
+      e=event||window.event;
+      yy.style.display="none";
+      e.stopPropagation();
+
+    };
+    button.onclick=function(e){
+      e=event||window.event;
+      yy.style.display="none";
+      e.stopPropagation();
+
+    };
+    document.documentElement.onclick=function(){
+      yy.style.display="block"
+    }
+    </script>
+</body>
+</html>
